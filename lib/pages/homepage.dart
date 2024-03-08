@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/pages/loc_permission_error_page.dart';
+import 'package:weather_app/pages/loc_service_error_page.dart';
+import 'package:weather_app/pages/request_error_page.dart';
+import 'package:weather_app/pages/search_error_page.dart';
 import 'package:weather_app/widgets/custom_searchbar.dart';
 
 import '../provider/weather_provider.dart';
@@ -42,18 +46,19 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Consumer<WeatherProvider>(
           builder: (context, provider, _) {
-            if (!provider.isLoading && !provider.isLocationserviceEnabled)
-              return Container(); //location service error page
+            if (!provider.isLoading && !provider.isLocationserviceEnabled) {
+              return const LocationServiceErrorPage();
+            }
 
             if (!provider.isLoading &&
                 provider.locationPermission != LocationPermission.always &&
                 provider.locationPermission != LocationPermission.whileInUse) {
-              return Container(); //location permission error page
+              return const LocationPermissionErrorPage();
             }
 
-            if (provider.isRequestError) return Container(); //request error page
+            if (provider.isRequestError) return const RequestErrorPage();
 
-            if (provider.isSearchError) return Container(); //search error page
+            if (provider.isSearchError) return SearchErrorPage(fsc: searchBarController);
 
             return Stack(
               children: [
