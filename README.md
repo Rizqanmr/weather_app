@@ -1,15 +1,20 @@
-# weather_app
+# My Weather
 
-A new Flutter project.
+A simple weather App created using [Flutter](https://flutter.dev/) and [Dart](https://dart.dev/) and using API from [OpenWeatherMap](https://openweathermap.org/)</br></br>
+State management using Provider. </br>
 
-## Getting Started
+<p align="center">
+<img src="https://github.com/Rizqanmr/weather_app/blob/master/assets/screenshots/screenshot-1.png" width="20%" alt="Screenshot 1"></img> 
+<img src="https://github.com/Rizqanmr/weather_app/blob/master/assets/screenshots/screenshot-2.png" width="20%" alt="Screenshot 2"></img> 
+<img src="https://github.com/Rizqanmr/weather_app/blob/master/assets/screenshots/screenshot-3.png" width="20%" alt="Screenshot 3"></img> 
+<img src="https://github.com/Rizqanmr/weather_app/blob/master/assets/screenshots/screenshot-4.png" width="20%" alt="Screenshot 4"></img>
+</p>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
+- Automatically acquire user current location
+- Searchable location
+- Switch Temperature Celsius or Fahrenheit
+- 7 days weather forecast (to be continue)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
