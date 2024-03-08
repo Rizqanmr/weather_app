@@ -14,6 +14,10 @@ class WeatherModel with ChangeNotifier {
   final double windSpeed;
   String city;
   final String countryCode;
+  final int clouds;
+  final int visibility;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   WeatherModel({
     required this.temp,
@@ -29,6 +33,10 @@ class WeatherModel with ChangeNotifier {
     required this.windSpeed,
     required this.city,
     required this.countryCode,
+    required this.clouds,
+    required this.visibility,
+    required this.sunrise,
+    required this.sunset
   });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +54,10 @@ class WeatherModel with ChangeNotifier {
       windSpeed: (json['wind']['speed']).toDouble(),
       city: json['name'],
       countryCode: json['sys']['country'],
+      clouds: json['clouds']['all'],
+      visibility: json['visibility'],
+      sunrise: DateTime.fromMillisecondsSinceEpoch(json['sys']['sunrise'] * 1000),
+      sunset: DateTime.fromMillisecondsSinceEpoch(json['sys']['sunset'] * 1000)
     );
   }
 }
