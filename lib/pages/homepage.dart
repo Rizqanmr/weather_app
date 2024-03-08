@@ -4,6 +4,7 @@ import 'package:weather_app/widgets/custom_searchbar.dart';
 
 import '../widgets/current_weather_detail.dart';
 import '../widgets/current_weather_info.dart';
+import '../widgets/seven_day_forecast.dart';
 import '../widgets/weather_info_header.dart';
 
 class Homepage extends StatefulWidget {
@@ -39,6 +40,7 @@ class _HomepageState extends State<Homepage> {
               const SizedBox(height: 16.0),
               CurrentWeatherDetail(),
               const SizedBox(height: 24.0),
+              SevenDayForecast(),
             ],
           ),
           CustomSearchBar(searchBarController: searchBarController)

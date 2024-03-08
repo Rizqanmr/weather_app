@@ -17,10 +17,7 @@ class CurrentWeatherDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Current details',
-            style: mediumText,
-          ),
+          Text('Current details', style: semiboldText,),
           const SizedBox(height: 16.0,),
           keyValue('Precipitation', '100%'),
           keyValue('UV Index', 'Low'),
