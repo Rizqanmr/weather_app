@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
+import 'package:weather_app/models/geo_code.dart';
 import 'package:weather_app/models/weather.dart';
 import 'package:weather_app/utils/constant.dart';
 
@@ -81,7 +82,6 @@ class WeatherProvider with ChangeNotifier {
     try {
       currentLocation = LatLng(locData.latitude, locData.longitude);
       await getCurrentWeather(currentLocation!);
-      //await getDailyWeather(currentLocation!);
     } catch (e) {
       print(e);
       isRequestError = true;
@@ -104,6 +104,44 @@ class WeatherProvider with ChangeNotifier {
       print(error);
       isLoading = false;
       this.isRequestError = true;
+    }
+  }
+
+  Future<GeoCodeModel?> locationToLatLng(String location) async {
+    try {
+      Uri url = Uri.parse(
+        '${baseUrl}geo/1.0/direct?q=$location&limit=5&appid=$apiKey',
+      );
+      final http.Response response = await http.get(url);
+      if (response.statusCode != 200) return null;
+      return GeoCodeModel.fromJson(
+        jsonDecode(response.body)[0] as Map<String, dynamic>,
+      );
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  Future<void> searchWeather(String location) async {
+    isLoading = true;
+    notifyListeners();
+    isRequestError = false;
+    print('search');
+    try {
+      GeoCodeModel? geoCodeModel;
+      geoCodeModel = await locationToLatLng(location);
+      if (geoCodeModel == null) throw Exception('Unable to Find Location');
+      await getCurrentWeather(geoCodeModel.latLng);
+      // replace location name with data from geocode
+      // because data from certain lat long might return local area name
+      weatherModel.city = geoCodeModel.name;
+    } catch (e) {
+      print(e);
+      isSearchError = true;
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 }

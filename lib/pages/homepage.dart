@@ -43,24 +43,24 @@ class _HomepageState extends State<Homepage> {
       body: Consumer<WeatherProvider>(
           builder: (context, provider, _) {
             if (!provider.isLoading && !provider.isLocationserviceEnabled)
-              return Placeholder(); //location service error page
+              return Container(); //location service error page
 
             if (!provider.isLoading &&
                 provider.locationPermission != LocationPermission.always &&
                 provider.locationPermission != LocationPermission.whileInUse) {
-              return Placeholder(); //location permission error page
+              return Container(); //location permission error page
             }
 
-            if (provider.isRequestError) return Placeholder(); //request error page
+            if (provider.isRequestError) return Container(); //request error page
 
-            if (provider.isSearchError) return Placeholder(); //search error page
+            if (provider.isSearchError) return Container(); //search error page
 
             return Stack(
               children: [
                 ListView(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(12.0).copyWith(
-                    top: kToolbarHeight + MediaQuery.viewPaddingOf(context).top,
+                    top: kToolbarHeight + MediaQuery.viewPaddingOf(context).top + 16.0,
                   ),
                   children: [
                     WeatherInfoHeader(),
@@ -76,7 +76,7 @@ class _HomepageState extends State<Homepage> {
               ],
             );
           }
-      )// This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

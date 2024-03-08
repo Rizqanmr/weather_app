@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/themes/colors.dart';
 
+import '../provider/weather_provider.dart';
 import '../themes/text_styles.dart';
 
 class CustomSearchBar extends StatefulWidget {
@@ -18,13 +20,13 @@ class CustomSearchBar extends StatefulWidget {
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
   List<String> _citiesSuggestion = [
-    'New York',
+    'Jakarta',
     'Tokyo',
     'Dubai',
     'London',
     'Singapore',
     'Sydney',
-    'Wellington'
+    'Manchester'
   ];
 
   @override
@@ -46,8 +48,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       onQueryChanged: (query) {},
       onSubmitted: (query) async {
         widget.searchBarController.close();
-        // await Provider.of<WeatherProvider>(context, listen: false)
-        //     .searchWeather(query);
+        await Provider.of<WeatherProvider>(context, listen: false)
+            .searchWeather(query);
       },
       transition: CircularFloatingSearchBarTransition(),
       actions: [
@@ -91,8 +93,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   onTap: () async {
                     widget.searchBarController.query = data;
                     widget.searchBarController.close();
-                    // await Provider.of<WeatherProvider>(context, listen: false)
-                    //     .searchWeather(data);
+                    await Provider.of<WeatherProvider>(context, listen: false)
+                        .searchWeather(data);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(22.0),
